@@ -26,7 +26,7 @@ def crawl_names(index):
     table = soup.find('table', {'class': 'table table-bordered table-striped'})
     tbody = table.find('tbody')
 
-    if 'lock' in dir():
+    if 'lock' in globals():
         for tr in tbody.find_all('tr'):
             a = tr.find('a', {'data-tooltip': 'notooltip'})
             if not a:
