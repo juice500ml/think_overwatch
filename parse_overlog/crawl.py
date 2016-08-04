@@ -21,6 +21,6 @@ def crawl(param):
     print(i)
 
 if __name__ == '__main__':
-    params = [('http://overlog.gg/leaderboards/global/rank/' + str(i), i) for i in range(1000, 6219)]
-    pool = Pool(6)
+    params = [('http://overlog.gg/leaderboards/global/rank/' + str(i), i) for i in range(1,6219)]
+    pool = Pool(16)
     pool.map(crawl, params)
