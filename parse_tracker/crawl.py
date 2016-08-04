@@ -57,6 +57,16 @@ def bsearch_names(s=1, f=800):
         return bsearch_names(s, (s+f)//2)
 
 
+# check duplicate links
+def check_links():
+    s = set()
+    with open('links.txt', 'r') as f:
+        for l in f.readlines():
+            s.add(l)
+    with open('links.txt', 'w') as f:
+        for l in s:
+            f.write(l)
+
 if __name__ == '__main__':
     index = bsearch_names()
     print('Searching through 1 ~ %d' % index)
@@ -64,3 +74,7 @@ if __name__ == '__main__':
     params = [i for i in range(1, index + 1)]
     pool = Pool(16, initializer=__init_lock, initargs=(Lock(),))
     pool.map(crawl_names, params)
+    pool.close()
+    pool.join()
+
+    check_links()
