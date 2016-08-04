@@ -8,7 +8,7 @@ def crawl_names(index):
     url = "https://overwatchtracker.com/leaderboards/pc/global/CompetitiveRank"
     url += "?page=%d&mode=1" % index
 
-    print('Crawling %d...\n', index)
+    print('Crawling %d...\n' % index)
 
     while True:
         try:
