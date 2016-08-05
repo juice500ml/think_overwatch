@@ -1,0 +1,62 @@
+1. Title: Overwatch Player Data
+
+2. Sources:
+   (a) Origin: This dataset was parsed from overwatchtracker.com
+   (b) Creator: juice500ml@gmail.com (Parsing)
+   (c) Date: 160804 on finding each user, 160805 on parsing each user
+
+4. Relevant Information:
+   Player stats of Blizzard's Overwatch Competetive Play Season 1.
+
+5. Number of Instances?: 
+
+6. Number of Attributes?: 43 continuous attribute, 1 class-valued attribute(BEST_HERO).
+
+7. Attribute Information:
+    1.  LEVEL               # Level
+    2.  RATING              # Skill Rating
+    3.  KILL_PER_MIN        # Eliminations per Min
+    4.  KILL_PER_GAME       # Eliminations per Game
+    5.  HEAL_PER_MIN        # Healing per Min
+    6.  HEAL_PER_GAME       # Healing per Game
+    7.  DMG_PER_MIN         # Damage per Min
+    8.  DMG_PER_GAME        # Damage per Game
+    9.  TOT_SOLO_KILL       # Solo Kills
+    10. TOT_OBJ_KILL        # Objective Kills
+    11. TOT_BLOW            # Final Blows
+    12. TOT_DMG             # Damage Done
+    13. TOT_KILL            # Eliminations
+    14. TOT_ENV_KILL        # Environmental Kills
+    15. TOT_MUL_KILL        # Multi Kills
+    16. TOT_DEATH           # Deaths
+    17. TOT_ENV_DEATH       # Environmental Deaths
+    18. TOT_WIN             # Games Won
+    19. TOT_GAME            # Games Played
+    20. TOT_FIRE_TIME       # Time Spent On Fire
+    21. TOT_OBJ_TIME        # Objective Time
+    22. TOT_TIME            # Time Played
+    23. TOT_ASSIST          # Assists
+    24. TOT_HEAL_ASSIST     # Healing Done
+    25. TOT_DEF_ASSIST      # Defensive Assists
+    26. TOT_ATK_ASSIST      # Offensive Assists
+    27. BEST_KILL           # Most Eliminations
+    28. BEST_BLOW           # Most Final Blows
+    29. BEST_DMG            # Most Damage Done
+    30. BEST_HEAL           # Most Healing
+    31. BEST_DEF_ASSIST     # Most Defensive Assists
+    32. BEST_ATK_ASSIST     # Most Offensive Assists
+    33. BEST_OBJ_KILL       # Most Objective Kills
+    34. BEST_OBJ_TIME       # Most Objective Time
+    35. BEST_SOLO_KILL      # Most Solo Kills
+    36. BEST_FIRE_TIME      # Most Time Spent On Fire
+    37. TOT_CARD            # Cards
+    38. TOT_MEDAL           # Medals
+    39. TOT_GOLD_MEDAL      # Gold Medals
+    40. TOT_SILVER_MEDAL    # Silver Medals
+    41. TOT_BRONZE_MEDAL    # Bronze Medals
+    42. BEST_HERO           # Most Played Hero
+    43. BEST_HERO_WIN       # Games Won With Most Played Hero
+    44. BEST_HERO_LOSE      # Games Lost With Most Played Hero
+
+8. Missing Attribute Values:  None.
+
