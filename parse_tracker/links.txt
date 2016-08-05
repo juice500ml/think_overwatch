@@ -11308,7 +11308,7 @@ Trigger#2320	/profile/pc/eu/Trigger-2320
 jefe#11407	/profile/pc/us/jefe-11407
 JoshC#1434	/profile/pc/us/JoshC-1434
 jeddy#11824	/profile/pc/us/jeddy-11824
-Lukzz#2368
+Lukzz#2368	/profile/pc/eu/Lukzz-2368
 MoroFSKY#2360	/profile/pc/eu/MoroFSKY-2360
 Lion#2659	/profile/pc/us/Lion-2659
 Kallius#1192	/profile/pc/us/Kallius-1192
@@ -22408,7 +22408,6 @@ BogusSpank#1782	/profile/pc/us/BogusSpank-1782
 Vatapo#2393	/profile/pc/eu/Vatapo-2393
 nak#11167	/profile/pc/us/nak-11167
 Reaver#1937	/profile/pc/us/Reaver-1937
-
 oneofthetime#1414	/profile/pc/us/oneofthetime-1414
 Saiao#11780	/profile/pc/us/Saiao-11780
 robwiz#1911	/profile/pc/us/robwiz-1911
@@ -37851,7 +37850,6 @@ Xylzse#1338	/profile/pc/us/Xylzse-1338
 Xaez#1333	/profile/pc/us/Xaez-1333
 Ultimatearcu#1987	/profile/pc/us/Ultimatearcu-1987
 Rinso#2413	/profile/pc/eu/Rinso-2413
-	/profile/pc/eu/Lukzz-2368
 Zelus#2209	/profile/pc/eu/Zelus-2209
 Yin#1561	/profile/pc/us/Yin-1561
 Mumit#1570	/profile/pc/us/Mumit-1570
