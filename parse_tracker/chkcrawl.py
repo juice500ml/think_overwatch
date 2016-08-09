@@ -76,6 +76,15 @@ if __name__ == '__main__':
                     print("%d Element data type is wrong" % i)
                     print(csv)
                     flag = True
+            if i == 1:
+                try:
+                    if int(csv[i]) == 0:
+                        print("%d Element data is wrong" % i)
+                        flag = True
+                except:
+                    print("%d Element data type is wrong" % i)
+                    print(csv)
+                    flag = True
 
         if flag:
             continue
