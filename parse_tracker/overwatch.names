@@ -3,12 +3,12 @@
 2. Sources:
    (a) Origin: This dataset was parsed from overwatchtracker.com
    (b) Creator: juice500ml@gmail.com (Parsing)
-   (c) Date: 160804 on finding each user, 160805 on parsing each user
+   (c) Date: 160804 on finding each user, 160807 on parsing each user
 
 4. Relevant Information:
    Player stats of Blizzard's Overwatch Competetive Play Season 1.
 
-5. Number of Instances?: 
+5. Number of Instances?: 47,267
 
 6. Number of Attributes?: 43 continuous attribute, 1 class-valued attribute(BEST_HERO).
 
