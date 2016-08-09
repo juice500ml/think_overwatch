@@ -98,7 +98,7 @@ def crawl_names(name, url):
     if not req.ok:
         with open('overwatch.response_error.log', 'a') as f:
             f.write(url + '\n')
-            raise Exception('parse_overwatch', 'Request Error')
+            return
 
     row = dict()
     soup = bs(req.text, 'html.parser')
