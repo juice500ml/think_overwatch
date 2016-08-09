@@ -370,7 +370,7 @@ def __init_lock(l):
 
 if __name__ == '__main__':
     try:
-        with open('small_links.txt', 'r') as f:
+        with open('links.txt', 'r') as f:
             params = [s.strip().split('\t') for s in f.readlines()]
     except:
         print('links.txt not found. Exiting program.')
