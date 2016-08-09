@@ -73,11 +73,3 @@ dat %>%
   geom_point() + 
   xlim(20, 80) +
   ggtitle("Does Healers get more cards?")
-
-#cut(rota2$age_mnth, 
-#    breaks = c(-Inf, 6, 12, 24, 60, 167, Inf), 
-#    labels = c("0-5 mnths", "6-11 mnths", "12-23 mnths", "24-59 mnths", "5-14 yrs", "adult"), 
-#    right = FALSE)
-
-dat %>%
-  filter()
