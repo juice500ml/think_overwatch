@@ -37,25 +37,30 @@ Overwatch puts players into **two teams of six**, with each player selecting one
 ![](heroes_img.png)  
 *Image from https://playoverwatch.com/en-us/heroes/#all*  
 *Copied on August 15, 2016*
+
 ### Hero Classes
 There are 4 hero classes in Overwatch; each role sufficient for victory.  
 *Role summary from http://overwatch.wikia.com/wiki/Role*  
 *Copied on August 15, 2016*
+
 ### Offense
-The main objective of the offense role is to scout the area, harass the opposing team, and press the objective. Heroes classified as offense generally have high damage weapons and abilities and lower health pools than tanks and some defense heroes. They are usually excellent duelists with high mobility and good burst or sustained damage.  
+The main objective of the offense role is to scout the area, harass the opposing team, and press the objective. Heroes classified as offense generally have high damage weapons and abilities and lower health pools than tanks and some defense heroes. They are usually excellent duelists with high mobility and good burst or sustained damage. 
 The following heroes have this role: McCree, Pharah, Reaper, Soldier: 76, Tracer and Genji. 
+
 ### Defense
 The main objective of the defense role is to guard locations, create choke points, and establish a front. They may have long range weapons or the ability to create turrets, and excel at area denial.  
 The following heroes have this role: Bastion, Hanzo, Junkrat, Torbjörn, Widowmaker and Mei. 
+
 ### Tank
 The main objective of the defense role is to guard locations, create choke points, and establish a front. They may have long range weapons or the ability to create turrets, and excel at area denial.  
 The following heroes have this role: Reinhardt, Roadhog, Winston, Zarya and D.Va.
+
 ### Support
 The objective of support is to heal, buff and provide utility. Support heroes boost the overall performance of their team by increasing their survivability, speed, and damage output. They are generally the worst duelists and are best when surrounded by teammates.  
 The following heroes have this role: Zenyatta, Mercy, Symmetra, Lúcio and Ana.
 
-
 # Heroes Overview
+
 ## Overwatch Competitive Play Ratings
 Ratings vary from 0 to near 90. If the player wins at competitive play, rating of the player goes up, and vice versa. It gets harder to increase rating when rating is higher, and easier when rating is lower. Tracked Players at *https://overwatchtracker.com* on August 7, 2016 were 47,267. And rating distribution as below.
 ```{r}
@@ -169,6 +174,7 @@ dat %>%
 At the lower tiers, defence heroes are mostly chosen, but as rating goes up, offense heroes are more chosen. This could be because offense heroes are shown as more harder hero to play, but Support heroes are more easier.
 
 
+
 ## Most Appreciated Heroes
 ```{r}
 dat %>%
@@ -200,7 +206,6 @@ dat %>%
   ylim(0, 1) +
   ggtitle("Which tank heroes get most cards?")
 ```
-
 ```{r}
 dat %>%
   filter(BEST_HERO %in% hero_heal) %>%
@@ -226,10 +231,19 @@ dat %>%
   ggtitle("Which hero classes get most cards?")
 ```
 
+
 # Hero Analysis
+Traits that can be calculated *per game* is chosen.  
+Kills, Heals, Damages, Solo kills, Objective kills, Final blows, Environmental kills, Multiple kills, Deaths, Environmental deaths, Fire time, Objective time, Heal assistance, Defence assistance, Attack assistance.
+
+
 ## Offense
 
 * Positive Traits
+  * KILL_PER_GAME  
+    Offensive heroes should deal fine amount of damage.
+  * DMG_PER_GAME  
+    Between Offensive heroes, Tracer, Genji and McCree's basic attack is not so strong or consistent as Solder:76, Pharah or Reaper. How to effectively use the basic attack decides for weak basic attack heroes.
   * AVG_FIRE_TIME  
     Offensive heroes should always be in *fire* mode, as kill streaks can easily achieve *fire* mode.
   * AVG_ASSIST / AVG_ATK_ASSIST / AVG_DEF_ASSIST  
@@ -255,8 +269,6 @@ dat_each <- dat %>%
               AVG_SOLO_KILL = TOT_SOLO_KILL / TOT_GAME,
               AVG_OBJ_KILL = TOT_OBJ_KILL / TOT_GAME,
               AVG_BLOW = TOT_BLOW / TOT_GAME,
-              AVG_DMG = TOT_DMG / TOT_GAME,
-              AVG_KILL = TOT_KILL / TOT_GAME,
               AVG_ENV_KILL = TOT_ENV_KILL / TOT_GAME,
               AVG_MUL_KILL = TOT_MUL_KILL / TOT_GAME,
               AVG_DEATH = TOT_DEATH / TOT_GAME,
@@ -280,6 +292,8 @@ hero_lm %>%
 print(summary(hero_lm))
 ```
 * Positive Traits
+  * KILL_PER_GAME
+  * DMG_PER_GAME
   * AVG_FIRE_TIME
   * AVG_ATK_ASSIST
   * AVG_OBJ_TIME
@@ -298,8 +312,6 @@ dat_each <- dat %>%
               AVG_SOLO_KILL = TOT_SOLO_KILL / TOT_GAME,
               AVG_OBJ_KILL = TOT_OBJ_KILL / TOT_GAME,
               AVG_BLOW = TOT_BLOW / TOT_GAME,
-              AVG_DMG = TOT_DMG / TOT_GAME,
-              AVG_KILL = TOT_KILL / TOT_GAME,
               AVG_ENV_KILL = TOT_ENV_KILL / TOT_GAME,
               AVG_MUL_KILL = TOT_MUL_KILL / TOT_GAME,
               AVG_DEATH = TOT_DEATH / TOT_GAME,
@@ -323,6 +335,8 @@ hero_lm %>%
 print(summary(hero_lm))
 ```
 * Positive Traits
+  * KILL_PER_GAME
+  * DMG_PER_GAME
   * AVG_FIRE_TIME
   * AVG_DEATH  
     Unusually, deaths raised the rating. From the fact that high rating players tend to use McCree often, and kills are more often at games played by high rankers, it can be deduced that this is the reason for high rate of average deaths.
@@ -341,8 +355,6 @@ dat_each <- dat %>%
               AVG_SOLO_KILL = TOT_SOLO_KILL / TOT_GAME,
               AVG_OBJ_KILL = TOT_OBJ_KILL / TOT_GAME,
               AVG_BLOW = TOT_BLOW / TOT_GAME,
-              AVG_DMG = TOT_DMG / TOT_GAME,
-              AVG_KILL = TOT_KILL / TOT_GAME,
               AVG_ENV_KILL = TOT_ENV_KILL / TOT_GAME,
               AVG_MUL_KILL = TOT_MUL_KILL / TOT_GAME,
               AVG_DEATH = TOT_DEATH / TOT_GAME,
@@ -366,6 +378,7 @@ hero_lm %>%
 print(summary(hero_lm))
 ```
 * Positive Traits
+  * KILL_PER_GAME
   * AVG_MUL_KILL  
     Hero speciality of Pharah can kill multiple enemies at one time. Effective usage of this skill is required for Pharah gameplay.
   * AVG_OBJ_TIME
@@ -388,8 +401,6 @@ dat_each <- dat %>%
               AVG_SOLO_KILL = TOT_SOLO_KILL / TOT_GAME,
               AVG_OBJ_KILL = TOT_OBJ_KILL / TOT_GAME,
               AVG_BLOW = TOT_BLOW / TOT_GAME,
-              AVG_DMG = TOT_DMG / TOT_GAME,
-              AVG_KILL = TOT_KILL / TOT_GAME,
               AVG_ENV_KILL = TOT_ENV_KILL / TOT_GAME,
               AVG_MUL_KILL = TOT_MUL_KILL / TOT_GAME,
               AVG_DEATH = TOT_DEATH / TOT_GAME,
@@ -413,6 +424,7 @@ hero_lm %>%
 print(summary(hero_lm))
 ```
 * Positive Traits
+  * KILL_PER_GAME
   * AVG_FIRE_TIME
   * AVG_ATK_ASSIST
   * AVG_OBJ_TIME
@@ -432,8 +444,6 @@ dat_each <- dat %>%
               AVG_SOLO_KILL = TOT_SOLO_KILL / TOT_GAME,
               AVG_OBJ_KILL = TOT_OBJ_KILL / TOT_GAME,
               AVG_BLOW = TOT_BLOW / TOT_GAME,
-              AVG_DMG = TOT_DMG / TOT_GAME,
-              AVG_KILL = TOT_KILL / TOT_GAME,
               AVG_ENV_KILL = TOT_ENV_KILL / TOT_GAME,
               AVG_MUL_KILL = TOT_MUL_KILL / TOT_GAME,
               AVG_DEATH = TOT_DEATH / TOT_GAME,
@@ -457,6 +467,7 @@ hero_lm %>%
 print(summary(hero_lm))
 ```
 * Positive Traits
+  * KILL_PER_GAME
   * AVG_FIRE_TIME
   * AVG_ATK_ASSIST
   * AVG_DEF_ASSIST
@@ -477,8 +488,6 @@ dat_each <- dat %>%
               AVG_SOLO_KILL = TOT_SOLO_KILL / TOT_GAME,
               AVG_OBJ_KILL = TOT_OBJ_KILL / TOT_GAME,
               AVG_BLOW = TOT_BLOW / TOT_GAME,
-              AVG_DMG = TOT_DMG / TOT_GAME,
-              AVG_KILL = TOT_KILL / TOT_GAME,
               AVG_ENV_KILL = TOT_ENV_KILL / TOT_GAME,
               AVG_MUL_KILL = TOT_MUL_KILL / TOT_GAME,
               AVG_DEATH = TOT_DEATH / TOT_GAME,
@@ -502,6 +511,7 @@ hero_lm %>%
 print(summary(hero_lm))
 ```
 * Positive Traits
+  * KILL_PER_GAME
   * AVG_FIRE_TIME
   * AVG_ATK_ASSIST
   * AVG_DEF_ASSIST
@@ -538,8 +548,6 @@ dat_each <- dat %>%
               AVG_SOLO_KILL = TOT_SOLO_KILL / TOT_GAME,
               AVG_OBJ_KILL = TOT_OBJ_KILL / TOT_GAME,
               AVG_BLOW = TOT_BLOW / TOT_GAME,
-              AVG_DMG = TOT_DMG / TOT_GAME,
-              AVG_KILL = TOT_KILL / TOT_GAME,
               AVG_ENV_KILL = TOT_ENV_KILL / TOT_GAME,
               AVG_MUL_KILL = TOT_MUL_KILL / TOT_GAME,
               AVG_DEATH = TOT_DEATH / TOT_GAME,
@@ -563,11 +571,12 @@ hero_lm %>%
 print(summary(hero_lm))
 ```
 * Positive Traits
-  * AVG_OBJ_TIME
+  * KILL_PER_GAME  
+    Bastion should not be inside objectives, but stationed in unsuspectible places, for kills. Bastion has consistent and strong basic attack.
 * Negative Traits
   * AVG_SOLO_KILL
   * AVG_DEATH  
-    Much more bigger negative value of AVG_DEATH indirectly shows the importance of quick battle-joining. Bastion has a very slow speed of joining, so its handicap is much bigger.
+    Much more bigger negative handicap of AVG_DEATH indirectly shows the importance of quick battle-joining. Bastion has a very slow speed of joining, so its handicap is much bigger.
 
 ### Hanzo
 ```{r, echo=FALSE}
@@ -580,8 +589,6 @@ dat_each <- dat %>%
               AVG_SOLO_KILL = TOT_SOLO_KILL / TOT_GAME,
               AVG_OBJ_KILL = TOT_OBJ_KILL / TOT_GAME,
               AVG_BLOW = TOT_BLOW / TOT_GAME,
-              AVG_DMG = TOT_DMG / TOT_GAME,
-              AVG_KILL = TOT_KILL / TOT_GAME,
               AVG_ENV_KILL = TOT_ENV_KILL / TOT_GAME,
               AVG_MUL_KILL = TOT_MUL_KILL / TOT_GAME,
               AVG_DEATH = TOT_DEATH / TOT_GAME,
@@ -605,11 +612,13 @@ hero_lm %>%
 print(summary(hero_lm))
 ```
 * Positive Traits
-  * AVG_OBJ_TIME
+  * KILL_PER_GAME  
+  * AVG_OBJ_TIME  
+    Hanzo should stay in objective, clearing out far enemies before coming too close. Hanzo's Sonic Arrow can help this.
+  * AVG_DEF_ASSIST
 * Negative Traits
   * AVG_SOLO_KILL
   * AVG_OBJ_KILL
-  * AVG_DEF_ASSIST
   * AVG_DEATH
 
 ### Junkrat
@@ -623,8 +632,6 @@ dat_each <- dat %>%
               AVG_SOLO_KILL = TOT_SOLO_KILL / TOT_GAME,
               AVG_OBJ_KILL = TOT_OBJ_KILL / TOT_GAME,
               AVG_BLOW = TOT_BLOW / TOT_GAME,
-              AVG_DMG = TOT_DMG / TOT_GAME,
-              AVG_KILL = TOT_KILL / TOT_GAME,
               AVG_ENV_KILL = TOT_ENV_KILL / TOT_GAME,
               AVG_MUL_KILL = TOT_MUL_KILL / TOT_GAME,
               AVG_DEATH = TOT_DEATH / TOT_GAME,
@@ -648,6 +655,8 @@ hero_lm %>%
 print(summary(hero_lm))
 ```
 * Positive Traits
+  * KILL_PER_GAME
+  * DMG_PER_GAME
   * AVG_FIRE_TIME
     Junkrat is one of the dealers within defence heroes, so it behaves similar with offense heroes.
   * AVG_OBJ_TIME
@@ -657,7 +666,7 @@ print(summary(hero_lm))
   * AVG_SOLO_KILL
   * AVG_OBJ_KILL
   * AVG_DEATH
-    But Junkrat is great at long distance dealing in particular. It is why death handicap is more smaller, as Junkrat does not need to be near the battlefield.
+    Junkrat's slow movement speed makes negative handicap of AVG_DEATH, similar to Bastion.
   * AVG_ENV_DEATH
     But this means that Junkrat has to understand map very throughly, so handicap for environmental deaths exists for Junkrat.
 
@@ -672,8 +681,6 @@ dat_each <- dat %>%
               AVG_SOLO_KILL = TOT_SOLO_KILL / TOT_GAME,
               AVG_OBJ_KILL = TOT_OBJ_KILL / TOT_GAME,
               AVG_BLOW = TOT_BLOW / TOT_GAME,
-              AVG_DMG = TOT_DMG / TOT_GAME,
-              AVG_KILL = TOT_KILL / TOT_GAME,
               AVG_ENV_KILL = TOT_ENV_KILL / TOT_GAME,
               AVG_MUL_KILL = TOT_MUL_KILL / TOT_GAME,
               AVG_DEATH = TOT_DEATH / TOT_GAME,
@@ -697,6 +704,7 @@ hero_lm %>%
 print(summary(hero_lm))
 ```
 * Positive Traits
+  * KILL_PER_GAME
   * AVG_OBJ_TIME
   * AVG_ATK_ASSIST
 * Negative Traits
@@ -714,8 +722,6 @@ dat_each <- dat %>%
               AVG_SOLO_KILL = TOT_SOLO_KILL / TOT_GAME,
               AVG_OBJ_KILL = TOT_OBJ_KILL / TOT_GAME,
               AVG_BLOW = TOT_BLOW / TOT_GAME,
-              AVG_DMG = TOT_DMG / TOT_GAME,
-              AVG_KILL = TOT_KILL / TOT_GAME,
               AVG_ENV_KILL = TOT_ENV_KILL / TOT_GAME,
               AVG_MUL_KILL = TOT_MUL_KILL / TOT_GAME,
               AVG_DEATH = TOT_DEATH / TOT_GAME,
@@ -739,7 +745,7 @@ hero_lm %>%
 print(summary(hero_lm))
 ```
 * Positive Traits
-  * AVG_BLOW
+  * AVG_BLOW  
     Many players forget that Torbjörn has a very powerful shotgun as a basic attack. It is great for making final blows in short distance. 
   * AVG_FIRE_TIME
 * Negative Traits
@@ -756,8 +762,6 @@ dat_each <- dat %>%
               AVG_SOLO_KILL = TOT_SOLO_KILL / TOT_GAME,
               AVG_OBJ_KILL = TOT_OBJ_KILL / TOT_GAME,
               AVG_BLOW = TOT_BLOW / TOT_GAME,
-              AVG_DMG = TOT_DMG / TOT_GAME,
-              AVG_KILL = TOT_KILL / TOT_GAME,
               AVG_ENV_KILL = TOT_ENV_KILL / TOT_GAME,
               AVG_MUL_KILL = TOT_MUL_KILL / TOT_GAME,
               AVG_DEATH = TOT_DEATH / TOT_GAME,
@@ -781,6 +785,7 @@ hero_lm %>%
 print(summary(hero_lm))
 ```
 * Positive Traits
+  * KILL_PER_GAME
 * Negative Traits
   * AVG_SOLO_KILL
   * AVG_OBJ_KIL
@@ -789,12 +794,16 @@ print(summary(hero_lm))
 ## Tank
 
 * Positive Traits
-  * AVG_FIRE_TIME
-  * AVG_OBJ_TIME
-  * AVG_DEF_ASSIST
-  * AVG_ATK_ASSIST
+  * KILL_PER_GAME
+  * AVG_FIRE_TIME  
+    Tank heroes can achieve fire time easily by objectives.
+  * AVG_OBJ_TIME  
+    Tank heroes should stay and keep objectives safe.
+  * AVG_DEF_ASSIST / AVG_ATK_ASSIST  
+    Tank heroes should use their skillset for other's good, such as D.Va's defensive matrix and Zarya's Particle Barrier.
 * Negative Traits
-  * AVG_SOLO_KILL
+  * AVG_SOLO_KILL  
+    Similar rules apply to Tank heroes. When Tank heores have to make their kills solo, the team itself have some problems.
   * AVG_OBJ_KILL
 
 ### D.Va
@@ -808,8 +817,6 @@ dat_each <- dat %>%
               AVG_SOLO_KILL = TOT_SOLO_KILL / TOT_GAME,
               AVG_OBJ_KILL = TOT_OBJ_KILL / TOT_GAME,
               AVG_BLOW = TOT_BLOW / TOT_GAME,
-              AVG_DMG = TOT_DMG / TOT_GAME,
-              AVG_KILL = TOT_KILL / TOT_GAME,
               AVG_ENV_KILL = TOT_ENV_KILL / TOT_GAME,
               AVG_MUL_KILL = TOT_MUL_KILL / TOT_GAME,
               AVG_DEATH = TOT_DEATH / TOT_GAME,
@@ -833,8 +840,11 @@ hero_lm %>%
 print(summary(hero_lm))
 ```
 * Positive Traits
-  * AVG_BLOW
+  * KILL_PER_GAME
+  * AVG_BLOW  
+    D.Va's Self-Destruct deals with substantial amount of damage. Positive feedback of average death blows means usage of the skillset is important.
   * AVG_ENV_KILL
+    D.Va can also knock off enemies using Boosters. This requires extensive amount of knowledge on playing maps. D.Va players should understand map characteristics and use them for crowd control & kills.
   * AVG_FIRE_TIME
   * AVG_ATK_ASSIST
   
@@ -853,8 +863,6 @@ dat_each <- dat %>%
               AVG_SOLO_KILL = TOT_SOLO_KILL / TOT_GAME,
               AVG_OBJ_KILL = TOT_OBJ_KILL / TOT_GAME,
               AVG_BLOW = TOT_BLOW / TOT_GAME,
-              AVG_DMG = TOT_DMG / TOT_GAME,
-              AVG_KILL = TOT_KILL / TOT_GAME,
               AVG_ENV_KILL = TOT_ENV_KILL / TOT_GAME,
               AVG_MUL_KILL = TOT_MUL_KILL / TOT_GAME,
               AVG_DEATH = TOT_DEATH / TOT_GAME,
@@ -878,7 +886,8 @@ hero_lm %>%
 print(summary(hero_lm))
 ```
 * Positive Traits
-  * AVG_MUL_KILL
+  * AVG_MUL_KILL  
+    Reinhardt has the skill Earthshattter, which can stun & eliminate multiple enemies at once. This skill is one of the handful of wide-ranged attacks, and deal amount itself is not so good, so combination between skillsets is necessary.
   * AVG_FIRE_TIME
   * AVG_OBJ_TIME
   * AVG_DEF_ASSIST
@@ -886,7 +895,8 @@ print(summary(hero_lm))
 * Negative Traits
   * AVG_SOLO_KILL
   * AVG_OBJ_KILL
-  * AVG_DEATH
+  * AVG_DEATH  
+    Similar to Bastion, Reinhardt's battle-joining speed is very slow compared to other heroes. Reinhardt should use use the Barrier Field to stay safe.
 
 ### Roadhog
 ```{r, echo=FALSE}
@@ -899,8 +909,6 @@ dat_each <- dat %>%
               AVG_SOLO_KILL = TOT_SOLO_KILL / TOT_GAME,
               AVG_OBJ_KILL = TOT_OBJ_KILL / TOT_GAME,
               AVG_BLOW = TOT_BLOW / TOT_GAME,
-              AVG_DMG = TOT_DMG / TOT_GAME,
-              AVG_KILL = TOT_KILL / TOT_GAME,
               AVG_ENV_KILL = TOT_ENV_KILL / TOT_GAME,
               AVG_MUL_KILL = TOT_MUL_KILL / TOT_GAME,
               AVG_DEATH = TOT_DEATH / TOT_GAME,
@@ -924,8 +932,10 @@ hero_lm %>%
 print(summary(hero_lm))
 ```
 * Positive Traits
+  * KILL_PER_GAME
+  * AVG_MUL_KILL  
+    Similar to Roadhog also has crowd-control skills, namely Whole Hog, which can stun & eliminate multiple enemies at once. Effective usage of this skill is required.
   * AVG_FIRE_TIME
-  * AVG_MUL_KILL
   * AVG_DEF_ASSIST
   * AVG_ATK_ASSIST
   * AVG_OBJ_TIME
@@ -945,8 +955,6 @@ dat_each <- dat %>%
               AVG_SOLO_KILL = TOT_SOLO_KILL / TOT_GAME,
               AVG_OBJ_KILL = TOT_OBJ_KILL / TOT_GAME,
               AVG_BLOW = TOT_BLOW / TOT_GAME,
-              AVG_DMG = TOT_DMG / TOT_GAME,
-              AVG_KILL = TOT_KILL / TOT_GAME,
               AVG_ENV_KILL = TOT_ENV_KILL / TOT_GAME,
               AVG_MUL_KILL = TOT_MUL_KILL / TOT_GAME,
               AVG_DEATH = TOT_DEATH / TOT_GAME,
@@ -970,9 +978,10 @@ hero_lm %>%
 print(summary(hero_lm))
 ```
 * Positive Traits
-  * AVG_DMG
+  * KILL_PER_GAME
   * AVG_FIRE_TIME
-  * AVG_ATK_ASSIST
+  * AVG_ATK_ASSIST  
+    No objective time for Winston means Winston should not be in objectives, but sneakily move around maps for low-health enemies.
 * Negative Traits
   * AVG_OBJ_KILL
 
@@ -987,8 +996,6 @@ dat_each <- dat %>%
               AVG_SOLO_KILL = TOT_SOLO_KILL / TOT_GAME,
               AVG_OBJ_KILL = TOT_OBJ_KILL / TOT_GAME,
               AVG_BLOW = TOT_BLOW / TOT_GAME,
-              AVG_DMG = TOT_DMG / TOT_GAME,
-              AVG_KILL = TOT_KILL / TOT_GAME,
               AVG_ENV_KILL = TOT_ENV_KILL / TOT_GAME,
               AVG_MUL_KILL = TOT_MUL_KILL / TOT_GAME,
               AVG_DEATH = TOT_DEATH / TOT_GAME,
@@ -1012,9 +1019,13 @@ hero_lm %>%
 print(summary(hero_lm))
 ```
 * Positive Traits
-  * AVG_BLOW
+  * KILL_PER_GAME
+  * DMG_PER_GAME
+  * AVG_BLOW  
+    Zarya has skill Particle Cannon for line of fire or alternatively bigger dealing. Sighting and hitting the opponent with explosive charge is important.
   * AVG_FIRE_TIME
   * AVG_OBJ_TIME
+  * AVG_ATK_ASSIST
   * AVG_DEF_ASSIST
 * Negative Traits
   * AVG_SOLO_KILL
@@ -1023,6 +1034,16 @@ print(summary(hero_lm))
 
 
 ## Support
+
+* Positive Traits
+  * AVG_MUL_KILL  
+    Particulary, Multi Kills helped Support heroes a lot of ratings, even though they do not have enough fire power for it.
+  * AVG_ATK_ASSIST  
+    There are some skills that Support heroes have, like Ana's Nano Boost or Mercy's Caduceus Staff. Hence it is sensional that Support heroes have to assist attacks.
+* Negative Traits
+  * AVG_SOLO_KILL
+  * AVG_OBJ_KIL
+
 ### Ana
 ```{r, echo=FALSE}
 hero = "Ana"
@@ -1034,8 +1055,6 @@ dat_each <- dat %>%
               AVG_SOLO_KILL = TOT_SOLO_KILL / TOT_GAME,
               AVG_OBJ_KILL = TOT_OBJ_KILL / TOT_GAME,
               AVG_BLOW = TOT_BLOW / TOT_GAME,
-              AVG_DMG = TOT_DMG / TOT_GAME,
-              AVG_KILL = TOT_KILL / TOT_GAME,
               AVG_ENV_KILL = TOT_ENV_KILL / TOT_GAME,
               AVG_MUL_KILL = TOT_MUL_KILL / TOT_GAME,
               AVG_DEATH = TOT_DEATH / TOT_GAME,
@@ -1060,6 +1079,7 @@ print(summary(hero_lm))
 ```
 * Positive Traits
   * AVG_ATK_ASSIST
+    Ana's skill Nano Boost usage is important for playing Ana.
 * Negative Traits
   * AVG_SOLO_KILL
 
@@ -1074,8 +1094,6 @@ dat_each <- dat %>%
               AVG_SOLO_KILL = TOT_SOLO_KILL / TOT_GAME,
               AVG_OBJ_KILL = TOT_OBJ_KILL / TOT_GAME,
               AVG_BLOW = TOT_BLOW / TOT_GAME,
-              AVG_DMG = TOT_DMG / TOT_GAME,
-              AVG_KILL = TOT_KILL / TOT_GAME,
               AVG_ENV_KILL = TOT_ENV_KILL / TOT_GAME,
               AVG_MUL_KILL = TOT_MUL_KILL / TOT_GAME,
               AVG_DEATH = TOT_DEATH / TOT_GAME,
@@ -1099,8 +1117,11 @@ hero_lm %>%
 print(summary(hero_lm))
 ```
 * Positive Traits
+  * KILL_PER_GAME
+  * DMG_PER_GAME
   * AVG_BLOW
-  * AVG_MUL_KILL
+  * AVG_MUL_KILL  
+    Lúcio is the most attack-oriented hero in Support heroes. This is why those traits come up for Lúcio.
   * AVG_FIRE_TIME
   * AVG_OBJ_TIME
   * AVG_DEF_ASSIST
@@ -1109,7 +1130,8 @@ print(summary(hero_lm))
   * AVG_SOLO_KILL
   * AVG_OBJ_KILL
   * AVG_ENV_KILL
-  * AVG_DEATH
+  * AVG_DEATH  
+    Big handicap even though fast battle-joining is because Lúcio should be alive among teammates to heal constantly.
 
 ### Mercy
 ```{r, echo=FALSE}
@@ -1122,8 +1144,6 @@ dat_each <- dat %>%
               AVG_SOLO_KILL = TOT_SOLO_KILL / TOT_GAME,
               AVG_OBJ_KILL = TOT_OBJ_KILL / TOT_GAME,
               AVG_BLOW = TOT_BLOW / TOT_GAME,
-              AVG_DMG = TOT_DMG / TOT_GAME,
-              AVG_KILL = TOT_KILL / TOT_GAME,
               AVG_ENV_KILL = TOT_ENV_KILL / TOT_GAME,
               AVG_MUL_KILL = TOT_MUL_KILL / TOT_GAME,
               AVG_DEATH = TOT_DEATH / TOT_GAME,
@@ -1157,6 +1177,7 @@ print(summary(hero_lm))
   * AVG_OBJ_KILL
   * AVG_DEATH
   * AVG_ENV_DEATH
+    Just like Lúcio, Mercy too suffer big handicaps. Moreover, Mercy can fly for a short amount of time by Angelic Descent, so it is prone to environmental deaths.
 
 ### Symmetra
 ```{r, echo=FALSE}
@@ -1169,8 +1190,6 @@ dat_each <- dat %>%
               AVG_SOLO_KILL = TOT_SOLO_KILL / TOT_GAME,
               AVG_OBJ_KILL = TOT_OBJ_KILL / TOT_GAME,
               AVG_BLOW = TOT_BLOW / TOT_GAME,
-              AVG_DMG = TOT_DMG / TOT_GAME,
-              AVG_KILL = TOT_KILL / TOT_GAME,
               AVG_ENV_KILL = TOT_ENV_KILL / TOT_GAME,
               AVG_MUL_KILL = TOT_MUL_KILL / TOT_GAME,
               AVG_DEATH = TOT_DEATH / TOT_GAME,
@@ -1210,8 +1229,6 @@ dat_each <- dat %>%
               AVG_SOLO_KILL = TOT_SOLO_KILL / TOT_GAME,
               AVG_OBJ_KILL = TOT_OBJ_KILL / TOT_GAME,
               AVG_BLOW = TOT_BLOW / TOT_GAME,
-              AVG_DMG = TOT_DMG / TOT_GAME,
-              AVG_KILL = TOT_KILL / TOT_GAME,
               AVG_ENV_KILL = TOT_ENV_KILL / TOT_GAME,
               AVG_MUL_KILL = TOT_MUL_KILL / TOT_GAME,
               AVG_DEATH = TOT_DEATH / TOT_GAME,
@@ -1243,3 +1260,276 @@ print(summary(hero_lm))
   * AVG_SOLO_KILL
   * AVG_OBJ_KILL
   * AVG_DEATH
+
+## Coefficient Assemble!
+Gather up meaningful coefficients per game. These stats does meaningful amount of difference into play ratings.
+
+```{r}
+hero_coef_df <- data.frame()
+
+for (hero in c(hero_atk, hero_def, hero_tank, hero_heal)) {
+  dat_each <- dat %>%
+    filter(BEST_HERO == hero) %>%
+      transmute(KILL_PER_GAME,
+                HEAL_PER_GAME,
+                DMG_PER_GAME,
+                AVG_SOLO_KILL = TOT_SOLO_KILL / TOT_GAME,
+                AVG_OBJ_KILL = TOT_OBJ_KILL / TOT_GAME,
+                AVG_BLOW = TOT_BLOW / TOT_GAME,
+                AVG_ENV_KILL = TOT_ENV_KILL / TOT_GAME,
+                AVG_MUL_KILL = TOT_MUL_KILL / TOT_GAME,
+                AVG_DEATH = TOT_DEATH / TOT_GAME,
+                AVG_ENV_DEATH = TOT_ENV_DEATH / TOT_GAME,
+                AVG_FIRE_TIME = TOT_FIRE_TIME / TOT_GAME,
+                AVG_OBJ_TIME = TOT_OBJ_TIME / TOT_GAME,
+                AVG_HEAL_ASSIST = TOT_HEAL_ASSIST / TOT_GAME,
+                AVG_DEF_ASSIST = TOT_DEF_ASSIST / TOT_GAME,
+                AVG_ATK_ASSIST = TOT_ATK_ASSIST / TOT_GAME,
+                RATING)
+  
+  hero_lm = lm(RATING ~ ., data = dat_each)
+  df_name <- data.frame(names(coef(hero_lm)))
+  coef_df <- data.frame(coef(summary(hero_lm)))
+  for(i in 2:length(coef(hero_lm))) {
+    if(coef_df[4][i,] < 0.01) {
+      hero_coef_df[hero, toString(df_name[i,])] = coef_df[1][i,]
+    }
+  }
+  hero_coef_df[hero, "BEST_HERO"] = hero
+}
+```
+
+### Kills
+```{r}
+hero_coef_df %>%
+  mutate(BEST_HERO_CLASS =
+           ifelse(BEST_HERO %in% hero_atk, "Offense",
+                  ifelse(BEST_HERO %in% hero_def, "Defence",
+                         ifelse(BEST_HERO %in% hero_tank, "Tank", "Support")))) %>%
+  subset(!is.na(KILL_PER_GAME)) %>%
+  ggplot(aes(x=reorder(BEST_HERO, KILL_PER_GAME), y=KILL_PER_GAME, fill=BEST_HERO_CLASS)) +
+  ggtitle('Rating Increasement per Kill') +
+  geom_bar(stat='identity') +
+  coord_flip() +
+  xlab("Hero Chosen") +
+  ylab("Coefficient")
+```
+Naturally, support and tank heroes has a relatively low impact on kills, but Mercy has a large amount of increasement; stating Mercy's Caduceus blaster can be very lethal and used effectively when dealing. But mostly, Kills does help for rating to go up.
+
+### Damages
+```{r, echo=FALSE}
+hero_coef_df %>%
+  mutate(BEST_HERO_CLASS =
+           ifelse(BEST_HERO %in% hero_atk, "Offense",
+                  ifelse(BEST_HERO %in% hero_def, "Defence",
+                         ifelse(BEST_HERO %in% hero_tank, "Tank", "Support")))) %>%
+  subset(!is.na(DMG_PER_GAME)) %>%
+  ggplot(aes(x=reorder(BEST_HERO, DMG_PER_GAME), y=DMG_PER_GAME, fill=BEST_HERO_CLASS)) +
+  ggtitle('Rating Increasement per Damage') +
+  geom_bar(stat='identity') +
+  coord_flip() +
+  xlab("Hero Chosen") +
+  ylab("Coefficient")
+```
+Damages are more for low-dealing offense heroes, like Tracer, McCree or Genji. Moreover, Lúcio and Zarya should deal more for higher rating; even they are not defence or offense heroes. Lúcio should cope with slow bullet speed of Sonic Amplifier, and Zarya too should cope with Particle Cannon explosive charges.
+
+### Solo Kills
+```{r, echo=FALSE}
+attach(hero_coef_df)
+par(mfrow=c(1,2))
+hero_coef_df %>%
+  mutate(BEST_HERO_CLASS =
+           ifelse(BEST_HERO %in% hero_atk, "Offense",
+                  ifelse(BEST_HERO %in% hero_def, "Defence",
+                         ifelse(BEST_HERO %in% hero_tank, "Tank", "Support")))) %>%
+  subset(!is.na(AVG_SOLO_KILL)) %>%
+  ggplot(aes(x=reorder(BEST_HERO, AVG_SOLO_KILL), y=AVG_SOLO_KILL, fill=BEST_HERO_CLASS)) +
+  ggtitle('Rating Increasement per Solo Kill') +
+  geom_bar(stat='identity') +
+  coord_flip() +
+  xlab("Hero Chosen") +
+  ylab("Coefficient")
+```
+Solo kills normally means hero has encountered one-to-one situation, and the hero got some blows from the opponent. Health packs are a rarity. So it has a negative impact on ratings. Support heroes suffers the most, whereas long distance Defense heroes or short distance offense heroes suffers lesser.
+
+### Objective Kills
+```{r, echo=FALSE}
+hero_coef_df %>%
+  mutate(BEST_HERO_CLASS =
+           ifelse(BEST_HERO %in% hero_atk, "Offense",
+                  ifelse(BEST_HERO %in% hero_def, "Defence",
+                         ifelse(BEST_HERO %in% hero_tank, "Tank", "Support")))) %>%
+  subset(!is.na(AVG_OBJ_KILL)) %>%
+  ggplot(aes(x=reorder(BEST_HERO, AVG_OBJ_KILL), y=AVG_OBJ_KILL, fill=BEST_HERO_CLASS)) +
+  ggtitle('Rating Increasement per Objective Kill') +
+  geom_bar(stat='identity') +
+  coord_flip() +
+  xlab("Hero Chosen") +
+  ylab("Coefficient")
+```
+Also, Objective Kills are earned when objectives are in danger, so it has a negative impact on ratings too. Offense heroes should not be in the objective, but in the front line, so Offense heroes suffer the most, and Tank heroes suffers more less.
+
+
+
+### Death Blows
+```{r}
+hero_coef_df %>%
+  mutate(BEST_HERO_CLASS =
+           ifelse(BEST_HERO %in% hero_atk, "Offense",
+                  ifelse(BEST_HERO %in% hero_def, "Defence",
+                         ifelse(BEST_HERO %in% hero_tank, "Tank", "Support")))) %>%
+  subset(!is.na(AVG_BLOW)) %>%
+  ggplot(aes(x=reorder(BEST_HERO, AVG_BLOW), y=AVG_BLOW, fill=BEST_HERO_CLASS)) +
+  ggtitle('Rating Increasement per Death Blows') +
+  geom_bar(stat='identity') +
+  coord_flip() +
+  xlab("Hero Chosen") +
+  ylab("Coefficient")
+```
+
+
+### Environmental Kills
+```{r}
+hero_coef_df %>%
+  mutate(BEST_HERO_CLASS =
+           ifelse(BEST_HERO %in% hero_atk, "Offense",
+                  ifelse(BEST_HERO %in% hero_def, "Defence",
+                         ifelse(BEST_HERO %in% hero_tank, "Tank", "Support")))) %>%
+  subset(!is.na(AVG_ENV_KILL)) %>%
+  ggplot(aes(x=reorder(BEST_HERO, AVG_ENV_KILL), y=AVG_ENV_KILL, fill=BEST_HERO_CLASS)) +
+  ggtitle('Rating Increasement per Environmental Kill') +
+  geom_bar(stat='identity') +
+  coord_flip() +
+  xlab("Hero Chosen") +
+  ylab("Coefficient")
+```
+This shows that Environmental Kills by D.Va, using Boosters can be very helpful, but Roadhog's Chain Hooks or Lúcio's Sonic Amplifier can be not useful in many maps with some exceptions, like Illios.
+
+### Multi Kills
+```{r}
+hero_coef_df %>%
+  mutate(BEST_HERO_CLASS =
+           ifelse(BEST_HERO %in% hero_atk, "Offense",
+                  ifelse(BEST_HERO %in% hero_def, "Defence",
+                         ifelse(BEST_HERO %in% hero_tank, "Tank", "Support")))) %>%
+  subset(!is.na(AVG_MUL_KILL)) %>%
+  ggplot(aes(x=reorder(BEST_HERO, AVG_MUL_KILL), y=AVG_MUL_KILL, fill=BEST_HERO_CLASS)) +
+  ggtitle('Rating Increasement per Multi Kill') +
+  geom_bar(stat='identity') +
+  coord_flip() +
+  xlab("Hero Chosen") +
+  ylab("Coefficient")
+```
+Except lower three heroes, four Support heroes do not have any wide-ranged deals. This can be showing the significance of basic weapons that they have.
+
+### Deaths
+```{r}
+hero_coef_df %>%
+  mutate(BEST_HERO_CLASS =
+           ifelse(BEST_HERO %in% hero_atk, "Offense",
+                  ifelse(BEST_HERO %in% hero_def, "Defence",
+                         ifelse(BEST_HERO %in% hero_tank, "Tank", "Support")))) %>%
+  subset(!is.na(AVG_DEATH)) %>%
+  ggplot(aes(x=reorder(BEST_HERO, AVG_DEATH), y=AVG_DEATH, fill=BEST_HERO_CLASS)) +
+  ggtitle('Rating Increasement per Death') +
+  geom_bar(stat='identity') +
+  coord_flip() +
+  xlab("Hero Chosen") +
+  ylab("Coefficient")
+```
+Except from McCree, as discussed above, Deaths have a negative impacts on slow heroes or healing heroes. It is because of slow battle-joining speed, discussed multiple times above.
+
+### Environmental Deaths
+```{r}
+hero_coef_df %>%
+  mutate(BEST_HERO_CLASS =
+           ifelse(BEST_HERO %in% hero_atk, "Offense",
+                  ifelse(BEST_HERO %in% hero_def, "Defence",
+                         ifelse(BEST_HERO %in% hero_tank, "Tank", "Support")))) %>%
+  subset(!is.na(AVG_ENV_DEATH)) %>%
+  ggplot(aes(x=reorder(BEST_HERO, AVG_ENV_DEATH), y=AVG_ENV_DEATH, fill=BEST_HERO_CLASS)) +
+  ggtitle('Rating Increasement per Environmental Death') +
+  geom_bar(stat='identity') +
+  coord_flip() +
+  xlab("Hero Chosen") +
+  ylab("Coefficient")
+```
+Environmental Deaths have a negative blow on heroes that have to place themselves strategically, like Roadhog or Junkrat, or have high mobility, like Mercy or Tracer. These heroes especially need extensive map understanding.
+
+### Fire Time
+```{r}
+hero_coef_df %>%
+  mutate(BEST_HERO_CLASS =
+           ifelse(BEST_HERO %in% hero_atk, "Offense",
+                  ifelse(BEST_HERO %in% hero_def, "Defence",
+                         ifelse(BEST_HERO %in% hero_tank, "Tank", "Support")))) %>%
+  subset(!is.na(AVG_FIRE_TIME)) %>%
+  ggplot(aes(x=reorder(BEST_HERO, AVG_FIRE_TIME), y=AVG_FIRE_TIME, fill=BEST_HERO_CLASS)) +
+  ggtitle('Rating Increasement per Fire Time (sec)') +
+  geom_bar(stat='identity') +
+  coord_flip() +
+  xlab("Hero Chosen") +
+  ylab("Coefficient")
+```
+Blizzard's Fire Time system can be too Tank-oriented; as they increase a lot by same fire time.
+
+### Objective Time
+```{r}
+hero_coef_df %>%
+  mutate(BEST_HERO_CLASS =
+           ifelse(BEST_HERO %in% hero_atk, "Offense",
+                  ifelse(BEST_HERO %in% hero_def, "Defence",
+                         ifelse(BEST_HERO %in% hero_tank, "Tank", "Support")))) %>%
+  subset(!is.na(AVG_OBJ_TIME)) %>%
+  ggplot(aes(x=reorder(BEST_HERO, AVG_OBJ_TIME), y=AVG_OBJ_TIME, fill=BEST_HERO_CLASS)) +
+  ggtitle('Rating Increasement per Objective Time (sec)') +
+  geom_bar(stat='identity') +
+  coord_flip() +
+  xlab("Hero Chosen") +
+  ylab("Coefficient")
+```
+Offense heroes, especially Tracer, Genji, and Hanzo have to contribute on the objective itself. Also Soldier: 76 or Pharah & Mercy Objective Team can be great for winning.
+
+### Defensive Assists
+```{r}
+hero_coef_df %>%
+  mutate(BEST_HERO_CLASS =
+           ifelse(BEST_HERO %in% hero_atk, "Offense",
+                  ifelse(BEST_HERO %in% hero_def, "Defence",
+                         ifelse(BEST_HERO %in% hero_tank, "Tank", "Support")))) %>%
+  subset(!is.na(AVG_DEF_ASSIST)) %>%
+  ggplot(aes(x=reorder(BEST_HERO, AVG_DEF_ASSIST), y=AVG_DEF_ASSIST, fill=BEST_HERO_CLASS)) +
+  ggtitle('Rating Increasement per Defensive Assists') +
+  geom_bar(stat='identity') +
+  coord_flip() +
+  xlab("Hero Chosen") +
+  ylab("Coefficient")
+```
+
+### Offensive Assists
+```{r}
+hero_coef_df %>%
+  mutate(BEST_HERO_CLASS =
+           ifelse(BEST_HERO %in% hero_atk, "Offense",
+                  ifelse(BEST_HERO %in% hero_def, "Defence",
+                         ifelse(BEST_HERO %in% hero_tank, "Tank", "Support")))) %>%
+  subset(!is.na(AVG_ATK_ASSIST)) %>%
+  ggplot(aes(x=reorder(BEST_HERO, AVG_ATK_ASSIST), y=AVG_ATK_ASSIST, fill=BEST_HERO_CLASS)) +
+  ggtitle('Rating Increasement per Offensive Assists') +
+  geom_bar(stat='identity') +
+  coord_flip() +
+  xlab("Hero Chosen") +
+  ylab("Coefficient")
+```
+
+
+
+
+
+
+
+
+
+
+
+

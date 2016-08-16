@@ -157,13 +157,9 @@ dd <- dat %>%
   mutate(IS_HEALER = (BEST_HERO == "Mercy" | BEST_HERO == "Lúcio"))
 summary(lm(TOT_CARD/TOT_GAME ~ IS_HEALER, data=dd))
 
-dat_each <- dat %>%
-  filter(BEST_HERO == 'Soldier: 76') %>%
-  select(BEST_KILL, - BEST_HERO)
+hero_coef_df <- data.frame()
 
-
-for (hero in c(hero_atk)) {
-  print(hero)
+for (hero in c(hero_atk, hero_def, hero_tank, hero_heal)) {
   dat_each <- dat %>%
     filter(BEST_HERO == hero) %>%
       transmute(KILL_PER_GAME,
@@ -172,8 +168,6 @@ for (hero in c(hero_atk)) {
                 AVG_SOLO_KILL = TOT_SOLO_KILL / TOT_GAME,
                 AVG_OBJ_KILL = TOT_OBJ_KILL / TOT_GAME,
                 AVG_BLOW = TOT_BLOW / TOT_GAME,
-                AVG_DMG = TOT_DMG / TOT_GAME,
-                AVG_KILL = TOT_KILL / TOT_GAME,
                 AVG_ENV_KILL = TOT_ENV_KILL / TOT_GAME,
                 AVG_MUL_KILL = TOT_MUL_KILL / TOT_GAME,
                 AVG_DEATH = TOT_DEATH / TOT_GAME,
@@ -186,13 +180,35 @@ for (hero in c(hero_atk)) {
                 RATING)
   
   hero_lm = lm(RATING ~ ., data = dat_each)
-  hero_lm %>%
-    ggplot(aes(.fitted, .resid)) +
-    geom_point() +
-    stat_smooth(method="loess") +
-    geom_hline(yintercept=0, col="red", linetype="dashed") +
-    xlab("Fitted values") +
-    ylab("Residuals") +
-    ggtitle(paste("Residual vs Fitted Plot of Linear Model of Hero", hero, sep = " "))
-  print(summary(hero_lm))
+
+  # hero_lm %>%
+  #   ggplot(aes(.fitted, .resid)) +
+  #   geom_point() +
+  #   stat_smooth(method="loess") +
+  #   geom_hline(yintercept=0, col="red", linetype="dashed") +
+  #   xlab("Fitted values") +
+  #   ylab("Residuals") +
+  #   ggtitle(paste("Residual vs Fitted Plot of Linear Model of Hero", hero, sep = " "))
+  # print(summary(hero_lm))
+  
+  df_name <- data.frame(names(coef(hero_lm)))
+  coef_df <- data.frame(coef(summary(hero_lm)))
+  for(i in 2:length(coef(hero_lm))) {
+    if(coef_df[4][i,] < 0.01) {
+      hero_coef_df[hero, toString(df_name[i,])] = coef_df[1][i,]
+    }
+  }
+  hero_coef_df[hero, "BEST_HERO"] = hero
 }
+
+hero_coef_df %>%
+  mutate(BEST_HERO_CLASS =
+           ifelse(BEST_HERO %in% hero_atk, "Offense",
+                  ifelse(BEST_HERO %in% hero_def, "Defence",
+                         ifelse(BEST_HERO %in% hero_tank, "Tank", "Support")))) %>%
+  subset(!is.na(AVG_MUL_KILL)) %>%
+  ggplot(aes(x=reorder(BEST_HERO, AVG_MUL_KILL), y=AVG_MUL_KILL, fill=BEST_HERO_CLASS)) +
+  ggtitle('Overwatch Heroes') +
+  geom_bar(stat='identity') +
+  coord_flip() +
+  xlab("Hero Chosen")
