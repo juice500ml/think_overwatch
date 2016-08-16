@@ -4,3 +4,9 @@ __pycache__/
 
 # pyenv
 .python-version
+
+# R studio Project files
+.Rproj.user
+.Rhistory
+cache/*
+figure/*
